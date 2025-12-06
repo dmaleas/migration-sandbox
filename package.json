@@ -1,0 +1,10 @@
+{
+  "name": "migration-sandbox",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
