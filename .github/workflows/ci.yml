@@ -1,0 +1,34 @@
+name: CI Migration
+
+# 1. Triggers (Replaces 'workflows' section in CircleCI)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 2. The Job (Replaces 'jobs' section)
+  build-and-test:
+    # 3. The Executor (Replaces 'docker: image')
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 4. Checkout (Replaces 'checkout')
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 5. Setup Node (Replaces 'circleci/node' orb)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+          cache: 'npm' # Handles caching automatically
+
+      # 6. Install (Replaces 'node/install-packages')
+      - name: Install Dependencies
+        run: npm ci
+
+      # 7. Run Test (Replaces 'run: command')
+      - name: Run Tests
+        run: npm test
